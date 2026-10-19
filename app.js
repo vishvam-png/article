@@ -1,8 +1,11 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const app = express();
 const config = require('./config');
 
 app.use(express.json());
+app.use(cookieParser(config.cookieSecret));
+app.use('/auth', require('./routes/auth'));
 app.use('/articles', require('./routes/articles'));
 
 const port = config.port;
